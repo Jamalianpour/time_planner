@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Time planner Demo',
-      theme: ThemeData.dark(
-        // primarySwatch: Colors.blue,
-        // visualDensity: VisualDensity.adaptivePlatformDensity,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Time planner'),
     );
@@ -130,6 +130,34 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TimePlannerTitle(
               date: "3/23/2021",
+              title: "saturday",
+            ),
+            TimePlannerTitle(
+              date: "3/24/2021",
+              title: "tuesday",
+            ),
+            TimePlannerTitle(
+              date: "3/25/2021",
+              title: "wednesday",
+            ),
+            TimePlannerTitle(
+              date: "3/26/2021",
+              title: "thursday",
+            ),
+            TimePlannerTitle(
+              date: "3/27/2021",
+              title: "friday",
+            ),
+            TimePlannerTitle(
+              date: "3/28/2021",
+              title: "saturday",
+            ),
+            TimePlannerTitle(
+              date: "3/29/2021",
+              title: "friday",
+            ),
+            TimePlannerTitle(
+              date: "3/30/2021",
               title: "saturday",
             ),
           ],

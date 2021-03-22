@@ -18,7 +18,7 @@ class TimePlannerTask extends StatelessWidget {
   final Function onTap;
 
   /// Show this child on the task
-  /// 
+  ///
   /// Typically an [Text].
   final Widget child;
 

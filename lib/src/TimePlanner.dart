@@ -15,7 +15,7 @@ class TimePlanner extends StatefulWidget {
   final int endHour;
 
   /// Create days from here, each day is a TimePlannerTitle.
-  /// 
+  ///
   /// you should create at least one day
   final List<TimePlannerTitle> headers;
 

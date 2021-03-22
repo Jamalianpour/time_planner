@@ -3,7 +3,7 @@ import 'config/GlobalConfig.dart' as Config;
 
 /// Show the hour for each row of time planner
 class TimePlannerTime extends StatelessWidget {
-  /// Text it will be show as hour 
+  /// Text it will be show as hour
   final String time;
 
   /// Show the hour for each row of time planner

@@ -12,7 +12,7 @@ class TimePlannerStyle {
 
   /// Background colors of time planner
   Color backgroundColor;
-  
+
   TimePlannerStyle({
     this.cellHeight,
     this.cellWidth,
