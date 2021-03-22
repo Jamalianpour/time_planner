@@ -15,7 +15,7 @@ Each row show a hour and each column show a day but you can change the title of 
 
 | Desktop                                 | Web                             |
 | --------------------------------------- | ------------------------------- |
-| ![Notification](screenshot/Desktop.gif) | ![Attached](screenshot/web.gif) |
+| ![Notification](screenshot/Desktop.gif) | ![Attached](screenshot/Web.gif) |
 
 ## Usage
 
