@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 
 class TimePlannerStyle {
-  /// Height of each cell in time planner
-  int cellHeight;
+  /// Height of each cell in time planner, defaults is 90.
+  int? cellHeight;
 
-  /// Width of each cell in time planner
-  int cellWidth;
+  /// Width of each cell in time planner, defaults is 80.
+  int? cellWidth;
 
   /// Colors of main divider (under the title and next to hours)
-  Color dividerColor;
+  Color? dividerColor;
 
   /// Background colors of time planner
-  Color backgroundColor;
+  Color? backgroundColor;
 
-  TimePlannerStyle({
-    this.cellHeight,
-    this.cellWidth,
-    this.dividerColor,
-    this.backgroundColor,
-  });
+  /// Show horizontal and vertical [scrollBar] on time planner, defaults is false.
+  bool? showScrollBar;
+
+  TimePlannerStyle(
+      {this.cellHeight,
+      this.cellWidth,
+      this.dividerColor,
+      this.backgroundColor,
+      this.showScrollBar});
 }

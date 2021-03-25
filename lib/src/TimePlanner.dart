@@ -20,20 +20,20 @@ class TimePlanner extends StatefulWidget {
   final List<TimePlannerTitle> headers;
 
   /// List of widgets on time planner
-  final List<TimePlannerTask> tasks;
+  final List<TimePlannerTask>? tasks;
 
   /// Style of time planner
-  final TimePlannerStyle style;
+  final TimePlannerStyle? style;
 
-  /// When widget loaded scroll to current time with an animation. [Default: true]
-  final bool currentTimeAnimation;
+  /// When widget loaded scroll to current time with an animation. Default is true
+  final bool? currentTimeAnimation;
 
   /// Time planner widget
   const TimePlanner({
-    Key key,
-    @required this.startHour,
-    @required this.endHour,
-    @required this.headers,
+    Key? key,
+    required this.startHour,
+    required this.endHour,
+    required this.headers,
     this.tasks,
     this.style,
     this.currentTimeAnimation,
@@ -47,7 +47,9 @@ class _TimePlannerState extends State<TimePlanner> {
   ScrollController mainVerticalController = ScrollController();
   ScrollController dayHorizontalController = ScrollController();
   ScrollController timeVerticalController = ScrollController();
-  bool isAnimated = true;
+  TimePlannerStyle style = TimePlannerStyle();
+  List<TimePlannerTask> tasks = [];
+  bool? isAnimated = true;
 
   /// check input value for rules
   void _checkInputValue() {
@@ -57,18 +59,31 @@ class _TimePlannerState extends State<TimePlanner> {
       throw FlutterError("Start hour sholud be larger than 1");
     } else if (widget.endHour > 24) {
       throw FlutterError("Start hour sholud be lower than 24");
+    } else if (widget.headers.isEmpty) {
+      throw FlutterError("header can\'t be empty");
     }
+  }
+
+  /// create local style
+  void _convertToLocalStyle() {
+    style.backgroundColor = widget.style?.backgroundColor ?? null;
+    style.cellHeight = widget.style?.cellHeight ?? 80;
+    style.cellWidth = widget.style?.cellWidth ?? 90;
+    style.dividerColor = widget.style?.dividerColor ?? null;
+    style.showScrollBar = widget.style?.showScrollBar ?? false;
   }
 
   /// store input data to static values
   void _initData() {
     _checkInputValue();
-    Config.cellHeight = widget.style?.cellHeight ?? 80;
-    Config.cellWidth = widget.style?.cellWidth ?? 90;
+    _convertToLocalStyle();
+    Config.cellHeight = style.cellHeight;
+    Config.cellWidth = style.cellWidth;
     Config.totalHours = (widget.endHour - widget.startHour).toDouble();
     Config.totalDays = widget.headers.length;
     Config.startHour = widget.startHour;
-    isAnimated = widget?.currentTimeAnimation;
+    isAnimated = widget.currentTimeAnimation;
+    tasks = widget.tasks ?? [];
   }
 
   @override
@@ -79,7 +94,7 @@ class _TimePlannerState extends State<TimePlanner> {
       int hour = DateTime.now().hour;
       if (hour > widget.startHour) {
         double scrollOffset =
-            (hour - widget.startHour) * Config.cellHeight.toDouble();
+            (hour - widget.startHour) * Config.cellHeight!.toDouble();
         mainVerticalController.animateTo(scrollOffset,
             duration: Duration(milliseconds: 800), curve: Curves.easeOutCirc);
         timeVerticalController.animateTo(scrollOffset,
@@ -101,152 +116,225 @@ class _TimePlannerState extends State<TimePlanner> {
     mainVerticalController.addListener(() {
       timeVerticalController.jumpTo(mainVerticalController.offset);
     });
-    return Container(
-      color: widget.style?.backgroundColor ?? null,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          SingleChildScrollView(
-            controller: dayHorizontalController,
-            scrollDirection: Axis.horizontal,
-            physics: NeverScrollableScrollPhysics(),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+    return GestureDetector(
+      child: Container(
+        color: style.backgroundColor,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SingleChildScrollView(
+              controller: dayHorizontalController,
+              scrollDirection: Axis.horizontal,
+              physics: NeverScrollableScrollPhysics(),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(
+                    width: 60,
+                  ),
+                  for (int i = 0; i < Config.totalDays; i++) widget.headers[i],
+                ],
+              ),
+            ),
+            Container(
+              height: 1,
+              color: style.dividerColor ?? Theme.of(context).primaryColor,
+            ),
+            Expanded(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: timeVerticalController,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            //first number is start hour and secound number is end hour
+                            for (int i = widget.startHour;
+                                i <= widget.endHour;
+                                i++)
+                              TimePlannerTime(
+                                time: i.toString() + ':00',
+                              ),
+                          ],
+                        ),
+                        Container(
+                          height: (Config.totalHours * Config.cellHeight!) + 80,
+                          width: 1,
+                          color: style.dividerColor ??
+                              Theme.of(context).primaryColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: buildMainBody(),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildMainBody() {
+    if (style.showScrollBar!) {
+      return Scrollbar(
+        controller: mainVerticalController,
+        child: SingleChildScrollView(
+          controller: mainVerticalController,
+          child: Scrollbar(
+            controller: mainHorizontalController,
+            child: SingleChildScrollView(
+              controller: mainHorizontalController,
+              scrollDirection: Axis.horizontal,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      SizedBox(
+                        height: (Config.totalHours * Config.cellHeight!) + 80,
+                        width:
+                            (Config.totalDays * Config.cellWidth!).toDouble(),
+                        child: Stack(
+                          children: <Widget>[
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                for (var i = 0; i < Config.totalHours; i++)
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        height:
+                                            (Config.cellHeight! - 1).toDouble(),
+                                      ),
+                                      Divider(
+                                        height: 1,
+                                      ),
+                                    ],
+                                  )
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                for (var i = 0; i < Config.totalDays; i++)
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      SizedBox(
+                                        width:
+                                            (Config.cellWidth! - 1).toDouble(),
+                                      ),
+                                      Container(
+                                        width: 1,
+                                        height: (Config.totalHours *
+                                                Config.cellHeight!) +
+                                            Config.cellHeight!,
+                                        color: Colors.black12,
+                                      )
+                                    ],
+                                  )
+                              ],
+                            ),
+                            for (int i = 0; i < tasks.length; i++) tasks[i],
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return SingleChildScrollView(
+      controller: mainVerticalController,
+      child: SingleChildScrollView(
+        controller: mainHorizontalController,
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  width: 60,
-                ),
-                for (int i = 0; i < Config.totalDays; i++) widget.headers[i],
-              ],
-            ),
-          ),
-          Container(
-            height: 1,
-            color: widget.style?.dividerColor ?? Theme.of(context).primaryColor,
-          ),
-          Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: timeVerticalController,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                  height: (Config.totalHours * Config.cellHeight!) + 80,
+                  width: (Config.totalDays * Config.cellWidth!).toDouble(),
+                  child: Stack(
                     children: <Widget>[
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          //first number is start hour and secound number is end hour
-                          for (int i = widget.startHour;
-                              i <= widget.endHour;
-                              i++)
-                            TimePlannerTime(
-                              time: i.toString() + ':00',
-                            ),
+                          for (var i = 0; i < Config.totalHours; i++)
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: (Config.cellHeight! - 1).toDouble(),
+                                ),
+                                Divider(
+                                  height: 1,
+                                ),
+                              ],
+                            )
                         ],
                       ),
-                      Container(
-                        height: (Config.totalHours * Config.cellHeight) + 80,
-                        width: 1,
-                        color: widget.style?.dividerColor ??
-                            Theme.of(context).primaryColor,
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          for (var i = 0; i < Config.totalDays; i++)
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                SizedBox(
+                                  width: (Config.cellWidth! - 1).toDouble(),
+                                ),
+                                Container(
+                                  width: 1,
+                                  height:
+                                      (Config.totalHours * Config.cellHeight!) +
+                                          Config.cellHeight!,
+                                  color: Colors.black12,
+                                )
+                              ],
+                            )
+                        ],
                       ),
+                      for (int i = 0; i < tasks.length; i++) tasks[i],
                     ],
                   ),
                 ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: mainVerticalController,
-                    child: SingleChildScrollView(
-                      controller: mainHorizontalController,
-                      scrollDirection: Axis.horizontal,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              SizedBox(
-                                height:
-                                    (Config.totalHours * Config.cellHeight) +
-                                        80,
-                                width: (Config.totalDays * Config.cellWidth)
-                                    .toDouble(),
-                                child: Stack(
-                                  children: <Widget>[
-                                    Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        for (var i = 0;
-                                            i < Config.totalHours;
-                                            i++)
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              SizedBox(
-                                                height: (Config.cellHeight - 1)
-                                                    .toDouble(),
-                                              ),
-                                              Divider(
-                                                height: 1,
-                                              ),
-                                            ],
-                                          )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget>[
-                                        for (var i = 0;
-                                            i < Config.totalDays;
-                                            i++)
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: <Widget>[
-                                              SizedBox(
-                                                width: (Config.cellWidth - 1)
-                                                    .toDouble(),
-                                              ),
-                                              Container(
-                                                width: 1,
-                                                height: (Config.totalHours *
-                                                        Config.cellHeight) +
-                                                    Config.cellHeight,
-                                                color: Colors.black12,
-                                              )
-                                            ],
-                                          )
-                                      ],
-                                    ),
-                                    for (int i = 0;
-                                        i < widget.tasks.length;
-                                        i++)
-                                      widget.tasks[i],
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

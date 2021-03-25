@@ -9,18 +9,18 @@ class TimePlannerTitle extends StatelessWidget {
   final String title;
 
   /// Text style for title
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
 
   /// Date of each day like 03/21/2021 but you can leave it empty or write other things
-  final String date;
+  final String? date;
 
   /// Text style for date text
-  final TextStyle dateStyle;
+  final TextStyle? dateStyle;
 
   /// Title widget for time planner
   const TimePlannerTitle({
-    Key key,
-    @required this.title,
+    Key? key,
+    required this.title,
     this.date,
     this.titleStyle,
     this.dateStyle,
@@ -30,7 +30,7 @@ class TimePlannerTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 50,
-      width: Config.cellWidth.toDouble(),
+      width: Config.cellWidth!.toDouble(),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

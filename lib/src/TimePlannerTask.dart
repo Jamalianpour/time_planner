@@ -12,21 +12,21 @@ class TimePlannerTask extends StatelessWidget {
   final TimePlannerDateTime dateTime;
 
   /// Background color of task
-  final Color color;
+  final Color? color;
 
   /// This will be happen when user tap on task, for example show a dialog or navigate to other page
-  final Function onTap;
+  final Function? onTap;
 
   /// Show this child on the task
   ///
   /// Typically an [Text].
-  final Widget child;
+  final Widget? child;
 
   /// Widget that show on time planner as the tasks
   const TimePlannerTask({
-    Key key,
-    @required this.minutes,
-    @required this.dateTime,
+    Key? key,
+    required this.minutes,
+    required this.dateTime,
     this.color,
     this.onTap,
     this.child,
@@ -35,21 +35,21 @@ class TimePlannerTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: ((Config.cellHeight * (dateTime.hour - Config.startHour)) +
-              ((dateTime.minutes * Config.cellHeight) / 60))
+      top: ((Config.cellHeight! * (dateTime.hour - Config.startHour)) +
+              ((dateTime.minutes * Config.cellHeight!) / 60))
           .toDouble(),
-      left: Config.cellWidth * dateTime.day.toDouble(),
+      left: Config.cellWidth! * dateTime.day.toDouble(),
       child: Material(
         elevation: 3,
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
         child: Stack(
           children: [
             InkWell(
-              onTap: onTap ?? () {},
+              onTap: onTap as void Function()? ?? () {},
               child: Container(
-                height: ((minutes.toDouble() * Config.cellHeight) /
+                height: ((minutes.toDouble() * Config.cellHeight!) /
                     60), //60 minutes
-                width: Config.cellWidth.toDouble(),
+                width: Config.cellWidth!.toDouble(),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     color: color ?? Theme.of(context).primaryColor),

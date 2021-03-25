@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class TimePlannerDateTime {
   /// Day index from 0, this index dependence on your time planner header
   int day;
@@ -11,5 +9,5 @@ class TimePlannerDateTime {
   int minutes;
 
   TimePlannerDateTime(
-      {@required this.day, @required this.hour, @required this.minutes});
+      {required this.day, required this.hour, required this.minutes});
 }

@@ -162,12 +162,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
           tasks: tasks,
-          // style: TimePlannerStyle(
-          //   backgroundColor: Colors.blueGrey[900],
-          //   cellHeight: 60,
-          //   cellWidth: 60,
-          //   dividerColor: Colors.white,
-          // ),
+          style: TimePlannerStyle(
+              // cellHeight: 60,
+              // cellWidth: 60,
+              showScrollBar: true),
         ),
       ),
       floatingActionButton: FloatingActionButton(

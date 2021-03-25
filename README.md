@@ -1,6 +1,6 @@
 # Time planner
 
-![Pub Version](https://img.shields.io/pub/v/time_planner)
+[![Pub Version](https://img.shields.io/pub/v/time_planner)](https://pub.dev/packages/time_planner)
 
 A beautiful, easy to use and customizable time planner for flutter mobile 📱, desktop 🖥 and web 🌐
 
@@ -23,7 +23,7 @@ Each row show a hour and each column show a day but you can change the title of 
 
 ```yaml
 dependencies:
-  time_planner: ^0.0.1
+  time_planner: ^0.0.2
 ```
 
 ##### 2. import time planner lib
@@ -91,6 +91,7 @@ style: TimePlannerStyle(
   // default value for width is 80
   cellWidth: 60,
   dividerColor: Colors.white,
+  showScrollBar: true,
 ),
 ```
 
