@@ -9,13 +9,17 @@ Each row show a hour and each column show a day but you can change the title of 
 
 ## Screenshots
 
-| Mobile                                 | Dark                                    |
-| -------------------------------------- | --------------------------------------- |
-| ![Notification](screenshot/Mobile.gif) | ![Attached](screenshot/darkMobile.jpg) |
+| Mobile                           | Dark                               |
+| -------------------------------- | ---------------------------------- |
+| ![Mobile](screenshot/Mobile.gif) | ![Dark](screenshot/darkMobile.jpg) |
 
-| Desktop                                 | Web                             |
-| --------------------------------------- | ------------------------------- |
-| ![Notification](screenshot/Desktop.gif) | ![Attached](screenshot/Web.gif) |
+| Desktop                            | Web                        |
+| ---------------------------------- | -------------------------- |
+| ![Desktop](screenshot/Desktop.gif) | ![Web](screenshot/Web.gif) |
+
+## Demo
+
+You can see web demo here: [https://jamalianpour.github.io/time_planner_demo](https://jamalianpour.github.io/time_planner_demo)
 
 ## Usage
 
