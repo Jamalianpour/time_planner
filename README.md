@@ -1,6 +1,11 @@
 # Time planner
 
-[![Pub Version](https://img.shields.io/pub/v/time_planner)](https://pub.dev/packages/time_planner)
+<a href="https://pub.dev/packages/time_planner">
+   <img alt="Pub Version" src="https://img.shields.io/pub/v/time_planner.svg?longCache=true" />   
+</a>
+<a href="https://github.com/Solido/awesome-flutter">
+   <img alt="Awesome Flutter" src="https://img.shields.io/badge/Awesome-Flutter-blue.svg?longCache=true" />   
+</a>
 
 A beautiful, easy to use and customizable time planner for flutter mobile 📱, desktop 🖥 and web 🌐
 
@@ -92,7 +97,7 @@ style: TimePlannerStyle(
   backgroundColor: Colors.blueGrey[900],
   // default value for height is 80
   cellHeight: 60,
-  // default value for width is 80
+  // default value for width is 90
   cellWidth: 60,
   dividerColor: Colors.white,
   showScrollBar: true,
@@ -108,3 +113,4 @@ currentTimeAnimation: false,
 ---
 
 Fill free to fork this repository and send pull request 🏁👍
+[Medium post](https://yaus.ir/4n7MeZ)
