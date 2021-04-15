@@ -50,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
               day: Random().nextInt(14),
               hour: Random().nextInt(18) + 6,
               minutes: Random().nextInt(60)),
-          minutes: Random().nextInt(90) + 30,
+          minutesDuration: Random().nextInt(90) + 30,
+          daysDuration: Random().nextInt(4) + 1,
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('You click on time planner object')));
@@ -62,6 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Random task added to time planner!')));
   }
 
   @override

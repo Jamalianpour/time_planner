@@ -10,7 +10,7 @@
 A beautiful, easy to use and customizable time planner for flutter mobile 📱, desktop 🖥 and web 🌐
 
 This is a widget for show tasks to user on a time table.  
-Each row show a hour and each column show a day but you can change the title of column and show any things else you want.
+Each row show an hour and each column show a day but you can change the title of column and show any things else you want.
 
 ## Screenshots
 
@@ -32,7 +32,7 @@ You can see web demo here: [https://jamalianpour.github.io/time_planner_demo](ht
 
 ```yaml
 dependencies:
-  time_planner: ^0.0.2
+  time_planner: ^0.0.3
 ```
 
 ##### 2. import time planner lib
@@ -51,8 +51,10 @@ List<TimePlannerTask> tasks = [
     // day: Index of header, hour: Task will be begin at this hour
     // minutes: Task will be begin at this minutes
     dateTime: TimePlannerDateTime(day: 0, hour: 14, minutes: 30),
-    // duration of task
-    minutes: 90,
+    // Minutes duration of task
+    minutesDuration: 90,
+    // Days duration of task (use for multi days task)
+    daysDuration: 1,
     onTap: () {},
     child: Text(
       'this is a task',
@@ -87,6 +89,10 @@ TimePlanner(
   tasks: tasks,
 ),
 ```
+#### Multi days task
+You can add multi days task with `daysDuration` minimum and default value for this argument is 1 and result look like this :
+
+<img src="screenshot/MultiDay.png" alt="MultiDay" height=600/>
 
 ### Style
 
@@ -113,4 +119,5 @@ currentTimeAnimation: false,
 ---
 
 Fill free to fork this repository and send pull request 🏁👍
+
 [Medium post](https://yaus.ir/4n7MeZ)

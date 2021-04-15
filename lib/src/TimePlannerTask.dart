@@ -5,8 +5,11 @@ import 'config/GlobalConfig.dart' as Config;
 
 /// Widget that show on time planner as the tasks
 class TimePlannerTask extends StatelessWidget {
-  /// Duration of task or object
-  final int minutes;
+  /// Minutes duration of task or object
+  final int minutesDuration;
+
+  /// Days duration of task or object, default is 1
+  final int? daysDuration;
 
   /// When this task will be happen
   final TimePlannerDateTime dateTime;
@@ -25,8 +28,9 @@ class TimePlannerTask extends StatelessWidget {
   /// Widget that show on time planner as the tasks
   const TimePlannerTask({
     Key? key,
-    required this.minutes,
+    required this.minutesDuration,
     required this.dateTime,
+    this.daysDuration,
     this.color,
     this.onTap,
     this.child,
@@ -47,9 +51,10 @@ class TimePlannerTask extends StatelessWidget {
             InkWell(
               onTap: onTap as void Function()? ?? () {},
               child: Container(
-                height: ((minutes.toDouble() * Config.cellHeight!) /
+                height: ((minutesDuration.toDouble() * Config.cellHeight!) /
                     60), //60 minutes
-                width: Config.cellWidth!.toDouble(),
+                width: (Config.cellWidth!.toDouble() *
+                    (daysDuration! >= 1 ? daysDuration! : 1)),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     color: color ?? Theme.of(context).primaryColor),
