@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SnackBar(content: Text('You click on time planner object')));
           },
           child: Text(
-            'this is a test',
+            'this is a demo',
             style: TextStyle(color: Colors.grey[350], fontSize: 12),
           ),
         ),
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: TimePlanner(
           startHour: 6,
-          endHour: 24,
+          endHour: 23,
           headers: [
             TimePlannerTitle(
               date: "3/10/2021",
@@ -167,9 +167,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           tasks: tasks,
           style: TimePlannerStyle(
-              // cellHeight: 60,
-              // cellWidth: 60,
-              showScrollBar: true),
+            // cellHeight: 60,
+            // cellWidth: 60,
+            showScrollBar: true,
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

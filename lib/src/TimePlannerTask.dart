@@ -53,8 +53,8 @@ class TimePlannerTask extends StatelessWidget {
               child: Container(
                 height: ((minutesDuration.toDouble() * Config.cellHeight!) /
                     60), //60 minutes
-                width: (Config.cellWidth!.toDouble() *
-                    (daysDuration! >= 1 ? daysDuration! : 1)),
+                width: (Config.cellWidth!.toDouble() * (daysDuration ?? 1)),
+                    // (daysDuration! >= 1 ? daysDuration! : 1)),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     color: color ?? Theme.of(context).primaryColor),

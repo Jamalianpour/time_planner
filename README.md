@@ -32,7 +32,7 @@ You can see web demo here: [https://jamalianpour.github.io/time_planner_demo](ht
 
 ```yaml
 dependencies:
-  time_planner: ^0.0.3
+  time_planner: ^0.0.4
 ```
 
 ##### 2. import time planner lib
@@ -69,7 +69,7 @@ TimePlanner(
   // time will be start at this hour on table
   startHour: 6,
   // time will be end at this hour on table
-  endHour: 24,
+  endHour: 23,
   // each header is a column and a day
   headers: [
     TimePlannerTitle(
@@ -92,7 +92,7 @@ TimePlanner(
 #### Multi days task
 You can add multi days task with `daysDuration` minimum and default value for this argument is 1 and result look like this :
 
-<img src="screenshot/MultiDay.png" alt="MultiDay" height=600/>
+![MultiDay](screenshot/MultiDay.png)
 
 ### Style
 

@@ -8,10 +8,10 @@ import 'config/GlobalConfig.dart' as Config;
 
 /// Time planner widget
 class TimePlanner extends StatefulWidget {
-  /// Time start from this, it will start from 1
+  /// Time start from this, it will start from 0
   final int startHour;
 
-  /// Time end at this hour, max value is 24
+  /// Time end at this hour, max value is 23
   final int endHour;
 
   /// Create days from here, each day is a TimePlannerTitle.
@@ -55,10 +55,10 @@ class _TimePlannerState extends State<TimePlanner> {
   void _checkInputValue() {
     if (widget.startHour > widget.endHour) {
       throw FlutterError("Start hour sholud be lower than end hour");
-    } else if (widget.startHour < 1) {
-      throw FlutterError("Start hour sholud be larger than 1");
-    } else if (widget.endHour > 24) {
-      throw FlutterError("Start hour sholud be lower than 24");
+    } else if (widget.startHour < 0) {
+      throw FlutterError("Start hour sholud be larger than 0");
+    } else if (widget.endHour > 23) {
+      throw FlutterError("Start hour sholud be lower than 23");
     } else if (widget.headers.isEmpty) {
       throw FlutterError("header can\'t be empty");
     }
