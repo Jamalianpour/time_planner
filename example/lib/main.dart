@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:time_planner/time_planner.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,13 +18,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Time planner'),
+      home: const MyHomePage(title: 'Time planner'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -53,8 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
           minutesDuration: Random().nextInt(90) + 30,
           daysDuration: Random().nextInt(4) + 1,
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('You click on time planner object')));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('You click on time planner object')));
           },
           child: Text(
             'this is a demo',
@@ -65,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Random task added to time planner!')));
+        const SnackBar(content: Text('Random task added to time planner!')));
   }
 
   @override
@@ -79,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TimePlanner(
           startHour: 6,
           endHour: 23,
-          headers: [
+          headers: const [
             TimePlannerTitle(
               date: "3/10/2021",
               title: "sunday",
@@ -176,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addObject(context),
         tooltip: 'Add random task',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

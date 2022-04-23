@@ -8,6 +8,9 @@ class TimePlannerDateTime {
   /// Task will be begin at this minutes
   int minutes;
 
-  TimePlannerDateTime(
-      {required this.day, required this.hour, required this.minutes});
+  TimePlannerDateTime({
+    required this.day,
+    required this.hour,
+    required this.minutes,
+  });
 }

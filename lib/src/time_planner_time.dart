@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'config/GlobalConfig.dart' as Config;
+import 'package:time_planner/src/config/global_config.dart' as config;
 
 /// Show the hour for each row of time planner
 class TimePlannerTime extends StatelessWidget {
@@ -14,8 +14,8 @@ class TimePlannerTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Config.cellHeight!.toDouble() - 1,
+    return SizedBox(
+      height: config.cellHeight!.toDouble() - 1,
       width: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),

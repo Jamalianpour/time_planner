@@ -1,7 +1,7 @@
 library time_planner;
 
-export 'package:time_planner/src/TimePlanner.dart';
-export 'package:time_planner/src/TimePlannerTitle.dart';
-export 'package:time_planner/src/TimePlannerTask.dart';
-export 'package:time_planner/src/TimePlannerDateTime.dart';
-export 'package:time_planner/src/TimePlannerStyle.dart';
+export 'package:time_planner/src/time_planner.dart';
+export 'package:time_planner/src/time_planner_title.dart';
+export 'package:time_planner/src/time_planner_task.dart';
+export 'package:time_planner/src/time_planner_date_time.dart';
+export 'package:time_planner/src/time_planner_style.dart';

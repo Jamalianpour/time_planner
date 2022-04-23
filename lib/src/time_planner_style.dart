@@ -16,10 +16,11 @@ class TimePlannerStyle {
   /// Show horizontal and vertical [scrollBar] on time planner, default is false.
   bool? showScrollBar;
 
-  TimePlannerStyle(
-      {this.cellHeight,
-      this.cellWidth,
-      this.dividerColor,
-      this.backgroundColor,
-      this.showScrollBar});
+  TimePlannerStyle({
+    this.cellHeight,
+    this.cellWidth,
+    this.dividerColor,
+    this.backgroundColor,
+    this.showScrollBar,
+  });
 }
