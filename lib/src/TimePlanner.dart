@@ -4,7 +4,7 @@ import 'package:time_planner/src/TimePlannerStyle.dart';
 import 'TimePlannerTask.dart';
 import 'TimePlannerTime.dart';
 import 'TimePlannerTitle.dart';
-import 'config/GlobalConfig.dart' as Config;
+import 'config/GlobalConfig.dart' as config;
 
 /// Time planner widget
 class TimePlanner extends StatefulWidget {
@@ -60,16 +60,16 @@ class _TimePlannerState extends State<TimePlanner> {
     } else if (widget.endHour > 23) {
       throw FlutterError("Start hour sholud be lower than 23");
     } else if (widget.headers.isEmpty) {
-      throw FlutterError("header can\'t be empty");
+      throw FlutterError("header can't be empty");
     }
   }
 
   /// create local style
   void _convertToLocalStyle() {
-    style.backgroundColor = widget.style?.backgroundColor ?? null;
+    style.backgroundColor = widget.style?.backgroundColor;
     style.cellHeight = widget.style?.cellHeight ?? 80;
     style.cellWidth = widget.style?.cellWidth ?? 90;
-    style.dividerColor = widget.style?.dividerColor ?? null;
+    style.dividerColor = widget.style?.dividerColor;
     style.showScrollBar = widget.style?.showScrollBar ?? false;
   }
 
@@ -77,11 +77,11 @@ class _TimePlannerState extends State<TimePlanner> {
   void _initData() {
     _checkInputValue();
     _convertToLocalStyle();
-    Config.cellHeight = style.cellHeight;
-    Config.cellWidth = style.cellWidth;
-    Config.totalHours = (widget.endHour - widget.startHour).toDouble();
-    Config.totalDays = widget.headers.length;
-    Config.startHour = widget.startHour;
+    config.cellHeight = style.cellHeight;
+    config.cellWidth = style.cellWidth;
+    config.totalHours = (widget.endHour - widget.startHour).toDouble();
+    config.totalDays = widget.headers.length;
+    config.startHour = widget.startHour;
     isAnimated = widget.currentTimeAnimation;
     tasks = widget.tasks ?? [];
   }
@@ -94,11 +94,17 @@ class _TimePlannerState extends State<TimePlanner> {
       int hour = DateTime.now().hour;
       if (hour > widget.startHour) {
         double scrollOffset =
-            (hour - widget.startHour) * Config.cellHeight!.toDouble();
-        mainVerticalController.animateTo(scrollOffset,
-            duration: Duration(milliseconds: 800), curve: Curves.easeOutCirc);
-        timeVerticalController.animateTo(scrollOffset,
-            duration: Duration(milliseconds: 800), curve: Curves.easeOutCirc);
+            (hour - widget.startHour) * config.cellHeight!.toDouble();
+        mainVerticalController.animateTo(
+          scrollOffset,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeOutCirc,
+        );
+        timeVerticalController.animateTo(
+          scrollOffset,
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeOutCirc,
+        );
       }
     });
   }
@@ -127,16 +133,16 @@ class _TimePlannerState extends State<TimePlanner> {
             SingleChildScrollView(
               controller: dayHorizontalController,
               scrollDirection: Axis.horizontal,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                   ),
-                  for (int i = 0; i < Config.totalDays; i++) widget.headers[i],
+                  for (int i = 0; i < config.totalDays; i++) widget.headers[i],
                 ],
               ),
             ),
@@ -149,7 +155,7 @@ class _TimePlannerState extends State<TimePlanner> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   SingleChildScrollView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     controller: timeVerticalController,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -169,7 +175,7 @@ class _TimePlannerState extends State<TimePlanner> {
                           ],
                         ),
                         Container(
-                          height: (Config.totalHours * Config.cellHeight!) + 80,
+                          height: (config.totalHours * config.cellHeight!) + 80,
                           width: 1,
                           color: style.dividerColor ??
                               Theme.of(context).primaryColor,
@@ -211,23 +217,23 @@ class _TimePlannerState extends State<TimePlanner> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SizedBox(
-                        height: (Config.totalHours * Config.cellHeight!) + 80,
+                        height: (config.totalHours * config.cellHeight!) + 80,
                         width:
-                            (Config.totalDays * Config.cellWidth!).toDouble(),
+                            (config.totalDays * config.cellWidth!).toDouble(),
                         child: Stack(
                           children: <Widget>[
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                for (var i = 0; i < Config.totalHours; i++)
+                                for (var i = 0; i < config.totalHours; i++)
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       SizedBox(
                                         height:
-                                            (Config.cellHeight! - 1).toDouble(),
+                                            (config.cellHeight! - 1).toDouble(),
                                       ),
-                                      Divider(
+                                      const Divider(
                                         height: 1,
                                       ),
                                     ],
@@ -237,19 +243,19 @@ class _TimePlannerState extends State<TimePlanner> {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                for (var i = 0; i < Config.totalDays; i++)
+                                for (var i = 0; i < config.totalDays; i++)
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       SizedBox(
                                         width:
-                                            (Config.cellWidth! - 1).toDouble(),
+                                            (config.cellWidth! - 1).toDouble(),
                                       ),
                                       Container(
                                         width: 1,
-                                        height: (Config.totalHours *
-                                                Config.cellHeight!) +
-                                            Config.cellHeight!,
+                                        height: (config.totalHours *
+                                                config.cellHeight!) +
+                                            config.cellHeight!,
                                         color: Colors.black12,
                                       )
                                     ],
@@ -285,21 +291,21 @@ class _TimePlannerState extends State<TimePlanner> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  height: (Config.totalHours * Config.cellHeight!) + 80,
-                  width: (Config.totalDays * Config.cellWidth!).toDouble(),
+                  height: (config.totalHours * config.cellHeight!) + 80,
+                  width: (config.totalDays * config.cellWidth!).toDouble(),
                   child: Stack(
                     children: <Widget>[
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          for (var i = 0; i < Config.totalHours; i++)
+                          for (var i = 0; i < config.totalHours; i++)
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 SizedBox(
-                                  height: (Config.cellHeight! - 1).toDouble(),
+                                  height: (config.cellHeight! - 1).toDouble(),
                                 ),
-                                Divider(
+                                const Divider(
                                   height: 1,
                                 ),
                               ],
@@ -309,18 +315,18 @@ class _TimePlannerState extends State<TimePlanner> {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          for (var i = 0; i < Config.totalDays; i++)
+                          for (var i = 0; i < config.totalDays; i++)
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 SizedBox(
-                                  width: (Config.cellWidth! - 1).toDouble(),
+                                  width: (config.cellWidth! - 1).toDouble(),
                                 ),
                                 Container(
                                   width: 1,
                                   height:
-                                      (Config.totalHours * Config.cellHeight!) +
-                                          Config.cellHeight!,
+                                      (config.totalHours * config.cellHeight!) +
+                                          config.cellHeight!,
                                   color: Colors.black12,
                                 )
                               ],

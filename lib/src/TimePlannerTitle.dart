@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'config/GlobalConfig.dart' as Config;
+import 'config/GlobalConfig.dart' as config;
 
 /// Title widget for time planner
 class TimePlannerTitle extends StatelessWidget {
@@ -28,9 +28,9 @@ class TimePlannerTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
-      width: Config.cellWidth!.toDouble(),
+      width: config.cellWidth!.toDouble(),
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,14 +38,15 @@ class TimePlannerTitle extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: titleStyle ?? TextStyle(fontWeight: FontWeight.w600),
+              style: titleStyle ?? const TextStyle(fontWeight: FontWeight.w600),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Text(
               date ?? '',
-              style: dateStyle ?? TextStyle(color: Colors.grey, fontSize: 12),
+              style: dateStyle ??
+                  const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],
         ),
