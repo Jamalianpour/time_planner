@@ -54,11 +54,11 @@ class _TimePlannerState extends State<TimePlanner> {
   /// check input value for rules
   void _checkInputValue() {
     if (widget.startHour > widget.endHour) {
-      throw FlutterError("Start hour sholud be lower than end hour");
+      throw FlutterError("Start hour should be lower than end hour");
     } else if (widget.startHour < 0) {
-      throw FlutterError("Start hour sholud be larger than 0");
+      throw FlutterError("Start hour should be larger than 0");
     } else if (widget.endHour > 23) {
-      throw FlutterError("Start hour sholud be lower than 23");
+      throw FlutterError("Start hour should be lower than 23");
     } else if (widget.headers.isEmpty) {
       throw FlutterError("header can't be empty");
     }
@@ -165,7 +165,7 @@ class _TimePlannerState extends State<TimePlanner> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            //first number is start hour and secound number is end hour
+                            //first number is start hour and second number is end hour
                             for (int i = widget.startHour;
                                 i <= widget.endHour;
                                 i++)
