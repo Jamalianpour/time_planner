@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'TimePlannerDateTime.dart';
-import 'config/GlobalConfig.dart' as config;
+import 'package:time_planner/src/time_planner_date_time.dart';
+import 'package:time_planner/src/config/global_config.dart' as config;
 
 /// Widget that show on time planner as the tasks
 class TimePlannerTask extends StatelessWidget {
