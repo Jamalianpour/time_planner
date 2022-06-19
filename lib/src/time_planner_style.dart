@@ -7,6 +7,9 @@ class TimePlannerStyle {
   /// Width of each cell in time planner, default is 80.
   int? cellWidth;
 
+  /// horizontal padding (Left and Right) of each task in time planner, default is 5.
+  int? horizontalTaskPadding;
+
   /// Colors of main divider (under the title and next to hours)
   Color? dividerColor;
 
@@ -22,5 +25,6 @@ class TimePlannerStyle {
     this.dividerColor,
     this.backgroundColor,
     this.showScrollBar,
+    this.horizontalTaskPadding,
   });
 }

@@ -69,6 +69,7 @@ class _TimePlannerState extends State<TimePlanner> {
     style.backgroundColor = widget.style?.backgroundColor;
     style.cellHeight = widget.style?.cellHeight ?? 80;
     style.cellWidth = widget.style?.cellWidth ?? 90;
+    style.horizontalTaskPadding = widget.style?.horizontalTaskPadding ?? 5;
     style.dividerColor = widget.style?.dividerColor;
     style.showScrollBar = widget.style?.showScrollBar ?? false;
   }
@@ -77,6 +78,7 @@ class _TimePlannerState extends State<TimePlanner> {
   void _initData() {
     _checkInputValue();
     _convertToLocalStyle();
+    config.horizontalTaskPadding = style.horizontalTaskPadding;
     config.cellHeight = style.cellHeight;
     config.cellWidth = style.cellWidth;
     config.totalHours = (widget.endHour - widget.startHour).toDouble();
