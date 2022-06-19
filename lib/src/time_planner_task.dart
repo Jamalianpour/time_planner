@@ -43,7 +43,6 @@ class TimePlannerTask extends StatelessWidget {
           .toDouble(),
       left: config.cellWidth! * dateTime.day.toDouble(),
       child: SizedBox(
-        // height: 100,
         width: config.cellWidth!.toDouble() - config.horizontalTaskPadding!,
         child: Padding(
           padding: EdgeInsets.only(left: config.horizontalTaskPadding!.toDouble()),
