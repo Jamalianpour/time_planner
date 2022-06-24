@@ -42,27 +42,34 @@ class TimePlannerTask extends StatelessWidget {
               ((dateTime.minutes * config.cellHeight!) / 60))
           .toDouble(),
       left: config.cellWidth! * dateTime.day.toDouble(),
-      child: Material(
-        elevation: 3,
-        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-        child: Stack(
-          children: [
-            InkWell(
-              onTap: onTap as void Function()? ?? () {},
-              child: Container(
-                height: ((minutesDuration.toDouble() * config.cellHeight!) /
-                    60), //60 minutes
-                width: (config.cellWidth!.toDouble() * (daysDuration ?? 1)),
-                // (daysDuration! >= 1 ? daysDuration! : 1)),
-                decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                    color: color ?? Theme.of(context).primaryColor),
-                child: Center(
-                  child: child,
+      child: SizedBox(
+        width: config.cellWidth!.toDouble() - config.horizontalTaskPadding!,
+        child: Padding(
+          padding: EdgeInsets.only(left: config.horizontalTaskPadding!.toDouble()),
+          child: Material(
+            elevation: 3,
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            child: Stack(
+              children: [
+                InkWell(
+                  onTap: onTap as void Function()? ?? () {},
+                  child: Container(
+                    height: ((minutesDuration.toDouble() * config.cellHeight!) /
+                        60), //60 minutes
+                    width: (config.cellWidth!.toDouble() * (daysDuration ?? 1)),
+                    // (daysDuration! >= 1 ? daysDuration! : 1)),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8.0)),
+                        color: color ?? Theme.of(context).primaryColor),
+                    child: Center(
+                      child: child,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
