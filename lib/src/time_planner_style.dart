@@ -7,8 +7,8 @@ class TimePlannerStyle {
   /// Width of each cell in time planner, default is 80.
   int? cellWidth;
 
-  /// horizontal padding (Left and Right) of each task in time planner, default is 5.
-  int? horizontalTaskPadding;
+  /// Horizontal padding (Left and Right) of each task in time planner, default is 0.
+  double? horizontalTaskPadding;
 
   /// Colors of main divider (under the title and next to hours)
   Color? dividerColor;
@@ -19,6 +19,9 @@ class TimePlannerStyle {
   /// Show horizontal and vertical [scrollBar] on time planner, default is false.
   bool? showScrollBar;
 
+  /// Border radius for tasks, default is `BorderRadius.all(Radius.circular(8.0))`
+  BorderRadiusGeometry? borderRadius;
+
   TimePlannerStyle({
     this.cellHeight,
     this.cellWidth,
@@ -26,5 +29,6 @@ class TimePlannerStyle {
     this.backgroundColor,
     this.showScrollBar,
     this.horizontalTaskPadding,
+    this.borderRadius,
   });
 }

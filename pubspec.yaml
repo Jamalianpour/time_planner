@@ -1,7 +1,7 @@
 name: time_planner
 description: A beautiful, easy to use and customizable time planner for flutter mobile, desktop and web
-version: 0.0.4
-author: Mohammad Jamalianpour<jamalian.mjp@gmail.com>
+version: 0.1.0
+
 homepage: https://github.com/Jamalianpour/time_planner
 
 environment:

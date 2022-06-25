@@ -2,9 +2,12 @@
 
 library timeplanner.config;
 
+import 'package:flutter/material.dart';
+
 int? cellHeight;
 int? cellWidth;
-int? horizontalTaskPadding;
+double? horizontalTaskPadding;
 late double totalHours;
 late int totalDays;
 late int startHour;
+BorderRadiusGeometry? borderRadius;

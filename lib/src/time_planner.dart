@@ -51,7 +51,7 @@ class _TimePlannerState extends State<TimePlanner> {
   List<TimePlannerTask> tasks = [];
   bool? isAnimated = true;
 
-  /// check input value for rules
+  /// check input value rules
   void _checkInputValue() {
     if (widget.startHour > widget.endHour) {
       throw FlutterError("Start hour should be lower than end hour");
@@ -69,7 +69,9 @@ class _TimePlannerState extends State<TimePlanner> {
     style.backgroundColor = widget.style?.backgroundColor;
     style.cellHeight = widget.style?.cellHeight ?? 80;
     style.cellWidth = widget.style?.cellWidth ?? 90;
-    style.horizontalTaskPadding = widget.style?.horizontalTaskPadding ?? 5;
+    style.horizontalTaskPadding = widget.style?.horizontalTaskPadding ?? 0;
+    style.borderRadius = widget.style?.borderRadius ??
+        const BorderRadius.all(Radius.circular(8.0));
     style.dividerColor = widget.style?.dividerColor;
     style.showScrollBar = widget.style?.showScrollBar ?? false;
   }
@@ -84,6 +86,7 @@ class _TimePlannerState extends State<TimePlanner> {
     config.totalHours = (widget.endHour - widget.startHour).toDouble();
     config.totalDays = widget.headers.length;
     config.startHour = widget.startHour;
+    config.borderRadius = style.borderRadius;
     isAnimated = widget.currentTimeAnimation;
     tasks = widget.tasks ?? [];
   }
@@ -156,33 +159,38 @@ class _TimePlannerState extends State<TimePlanner> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: timeVerticalController,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            //first number is start hour and second number is end hour
-                            for (int i = widget.startHour;
-                                i <= widget.endHour;
-                                i++)
-                              TimePlannerTime(
-                                time: i.toString() + ':00',
-                              ),
-                          ],
-                        ),
-                        Container(
-                          height: (config.totalHours * config.cellHeight!) + 80,
-                          width: 1,
-                          color: style.dividerColor ??
-                              Theme.of(context).primaryColor,
-                        ),
-                      ],
+                  ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: timeVerticalController,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              //first number is start hour and second number is end hour
+                              for (int i = widget.startHour;
+                                  i <= widget.endHour;
+                                  i++)
+                                TimePlannerTime(
+                                  time: i.toString() + ':00',
+                                ),
+                            ],
+                          ),
+                          Container(
+                            height:
+                                (config.totalHours * config.cellHeight!) + 80,
+                            width: 1,
+                            color: style.dividerColor ??
+                                Theme.of(context).primaryColor,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
@@ -201,10 +209,12 @@ class _TimePlannerState extends State<TimePlanner> {
     if (style.showScrollBar!) {
       return Scrollbar(
         controller: mainVerticalController,
+        isAlwaysShown: true,
         child: SingleChildScrollView(
           controller: mainVerticalController,
           child: Scrollbar(
             controller: mainHorizontalController,
+            isAlwaysShown: true,
             child: SingleChildScrollView(
               controller: mainHorizontalController,
               scrollDirection: Axis.horizontal,

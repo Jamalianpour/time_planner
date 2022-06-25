@@ -32,7 +32,7 @@ You can see web demo here: [https://jamalianpour.github.io/time_planner_demo](ht
 
 ```yaml
 dependencies:
-  time_planner: ^0.0.4
+  time_planner: ^0.1.0
 ```
 
 ##### 2. import time planner lib
@@ -89,7 +89,9 @@ TimePlanner(
   tasks: tasks,
 ),
 ```
+
 #### Multi days task
+
 You can add multi days task with `daysDuration` minimum and default value for this argument is 1 and result look like this :
 
 ![MultiDay](screenshot/MultiDay.png)
@@ -107,13 +109,36 @@ style: TimePlannerStyle(
   cellWidth: 60,
   dividerColor: Colors.white,
   showScrollBar: true,
+  horizontalTaskPadding: 5,
+  borderRadius: const BorderRadius.all(Radius.circular(8)),
 ),
 ```
 
-when time planner widget loaded it will be scroll to current local hour and this futrue is true by default, you can turn this off like this:
+when time planner widget loaded it will be scroll to current local hour and this option is true by default, you can turn this off like this:
 
 ```dart
 currentTimeAnimation: false,
+```
+
+### Note
+
+If you use desktop or web platform and want users to be able to move with the mouse in the time planner, add this code to the code:
+
+```dart
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
+}
+
+// Set ScrollBehavior for an entire application.
+MaterialApp(
+  scrollBehavior: MyCustomScrollBehavior(),
+  // ...
+);
 ```
 
 ---

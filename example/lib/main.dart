@@ -1,10 +1,20 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:time_planner/time_planner.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Time planner Demo',
+      scrollBehavior: MyCustomScrollBehavior(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -81,6 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TimePlanner(
           startHour: 6,
           endHour: 23,
+          style: TimePlannerStyle(
+            // cellHeight: 60,
+            // cellWidth: 60,
+            showScrollBar: true,
+          ),
           headers: const [
             TimePlannerTitle(
               date: "3/10/2021",
@@ -168,11 +184,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
           tasks: tasks,
-          style: TimePlannerStyle(
-            // cellHeight: 60,
-            // cellWidth: 60,
-            showScrollBar: true,
-          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

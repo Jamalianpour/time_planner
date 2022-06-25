@@ -45,10 +45,11 @@ class TimePlannerTask extends StatelessWidget {
       child: SizedBox(
         width: config.cellWidth!.toDouble() - config.horizontalTaskPadding!,
         child: Padding(
-          padding: EdgeInsets.only(left: config.horizontalTaskPadding!.toDouble()),
+          padding:
+              EdgeInsets.only(left: config.horizontalTaskPadding!.toDouble()),
           child: Material(
             elevation: 3,
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: config.borderRadius,
             child: Stack(
               children: [
                 InkWell(
@@ -59,8 +60,7 @@ class TimePlannerTask extends StatelessWidget {
                     width: (config.cellWidth!.toDouble() * (daysDuration ?? 1)),
                     // (daysDuration! >= 1 ? daysDuration! : 1)),
                     decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8.0)),
+                        borderRadius: config.borderRadius,
                         color: color ?? Theme.of(context).primaryColor),
                     child: Center(
                       child: child,
