@@ -1,3 +1,6 @@
+## [0.1.1]
+- Fix multi days task
+
 ## [0.1.0]
 
 - Add BorderRadius for tasks to style
