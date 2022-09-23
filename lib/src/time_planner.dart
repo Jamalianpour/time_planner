@@ -97,19 +97,21 @@ class _TimePlannerState extends State<TimePlanner> {
     super.initState();
     Future.delayed(Duration.zero).then((_) {
       int hour = DateTime.now().hour;
-      if (hour > widget.startHour) {
-        double scrollOffset =
-            (hour - widget.startHour) * config.cellHeight!.toDouble();
-        mainVerticalController.animateTo(
-          scrollOffset,
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.easeOutCirc,
-        );
-        timeVerticalController.animateTo(
-          scrollOffset,
-          duration: const Duration(milliseconds: 800),
-          curve: Curves.easeOutCirc,
-        );
+      if (isAnimated != null && isAnimated == true) {
+        if (hour > widget.startHour) {
+          double scrollOffset =
+              (hour - widget.startHour) * config.cellHeight!.toDouble();
+          mainVerticalController.animateTo(
+            scrollOffset,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeOutCirc,
+          );
+          timeVerticalController.animateTo(
+            scrollOffset,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeOutCirc,
+          );
+        }
       }
     });
   }
