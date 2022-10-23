@@ -28,6 +28,8 @@ class TimePlanner extends StatefulWidget {
   /// When widget loaded scroll to current time with an animation. Default is true
   final bool? currentTimeAnimation;
 
+  final bool use24HourFormat;
+
   /// Time planner widget
   const TimePlanner({
     Key? key,
@@ -36,6 +38,7 @@ class TimePlanner extends StatefulWidget {
     required this.headers,
     this.tasks,
     this.style,
+    this.use24HourFormat = false,
     this.currentTimeAnimation,
   }) : super(key: key);
   @override
@@ -86,6 +89,7 @@ class _TimePlannerState extends State<TimePlanner> {
     config.totalHours = (widget.endHour - widget.startHour).toDouble();
     config.totalDays = widget.headers.length;
     config.startHour = widget.startHour;
+    config.use24HourFormat = widget.use24HourFormat;
     config.borderRadius = style.borderRadius;
     isAnimated = widget.currentTimeAnimation;
     tasks = widget.tasks ?? [];
@@ -179,9 +183,15 @@ class _TimePlannerState extends State<TimePlanner> {
                               for (int i = widget.startHour;
                                   i <= widget.endHour;
                                   i++)
-                                TimePlannerTime(
-                                  time: i.toString() + ':00',
-                                ),
+                                Padding(
+                                  // we need some additional padding horizontally if we're showing in am/pm format
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: !config.use24HourFormat ? 4 : 0,
+                                  ),
+                                  child: TimePlannerTime(
+                                    time: formattedTime(i),
+                                  ),
+                                )
                             ],
                           ),
                           Container(
@@ -357,5 +367,20 @@ class _TimePlannerState extends State<TimePlanner> {
         ),
       ),
     );
+  }
+
+  String formattedTime(int hour) {
+    /// this method formats the input hour into a time string
+    /// modifing it as necessary based on the use24HourFormat flag .
+    if (config.use24HourFormat) {
+      // we use the hour as-is
+      return hour.toString() + ':00';
+    } else {
+      // we format the time to use the am/pm scheme
+      if (hour == 0) return "12:00 am";
+      if (hour < 12) return "$hour:00 am";
+      if (hour == 12) return "12:00 pm";
+      return "${hour - 12}:00 pm";
+    }
   }
 }
