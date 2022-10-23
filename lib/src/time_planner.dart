@@ -127,6 +127,8 @@ class _TimePlannerState extends State<TimePlanner> {
 
   @override
   Widget build(BuildContext context) {
+    // we need to update the tasks list in case the tasks have changed
+    tasks = widget.tasks ?? [];
     mainHorizontalController.addListener(() {
       dayHorizontalController.jumpTo(mainHorizontalController.offset);
     });
