@@ -28,6 +28,7 @@ class TimePlanner extends StatefulWidget {
   /// When widget loaded scroll to current time with an animation. Default is true
   final bool? currentTimeAnimation;
 
+  /// Whether time is displayed in 24 hour format or am/pm format in the time column on the left.
   final bool use24HourFormat;
 
   /// Time planner widget
@@ -191,6 +192,7 @@ class _TimePlannerState extends State<TimePlanner> {
                                     horizontal: !config.use24HourFormat ? 4 : 0,
                                   ),
                                   child: TimePlannerTime(
+                                    // this returns the formatted time string based on the use24HourFormat argument.
                                     time: formattedTime(i),
                                   ),
                                 )
