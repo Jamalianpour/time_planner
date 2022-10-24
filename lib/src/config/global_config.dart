@@ -8,6 +8,7 @@ int? cellHeight;
 int? cellWidth;
 double? horizontalTaskPadding;
 late double totalHours;
+late bool use24HourFormat;
 late int totalDays;
 late int startHour;
 BorderRadiusGeometry? borderRadius;

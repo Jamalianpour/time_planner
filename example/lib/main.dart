@@ -92,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: TimePlanner(
           startHour: 6,
           endHour: 23,
+          use24HourFormat: false,
           style: TimePlannerStyle(
             // cellHeight: 60,
             // cellWidth: 60,
