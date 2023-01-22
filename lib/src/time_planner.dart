@@ -52,7 +52,7 @@ class _TimePlannerState extends State<TimePlanner> {
   ScrollController dayHorizontalController = ScrollController();
   ScrollController timeVerticalController = ScrollController();
   TimePlannerStyle style = TimePlannerStyle();
-  List<TimePlannerTask> tasks = [];
+  // List<TimePlannerTask> tasks = [];
   bool? isAnimated = true;
 
   /// check input value rules
@@ -93,7 +93,7 @@ class _TimePlannerState extends State<TimePlanner> {
     config.use24HourFormat = widget.use24HourFormat;
     config.borderRadius = style.borderRadius;
     isAnimated = widget.currentTimeAnimation;
-    tasks = widget.tasks ?? [];
+    // tasks = widget.tasks ?? [];
   }
 
   @override
@@ -128,8 +128,9 @@ class _TimePlannerState extends State<TimePlanner> {
 
   @override
   Widget build(BuildContext context) {
+    print('DEBUG -- build');
     // we need to update the tasks list in case the tasks have changed
-    tasks = widget.tasks ?? [];
+    // tasks = widget.tasks ?? [];
     mainHorizontalController.addListener(() {
       dayHorizontalController.jumpTo(mainHorizontalController.offset);
     });
@@ -222,6 +223,7 @@ class _TimePlannerState extends State<TimePlanner> {
   }
 
   Widget buildMainBody() {
+    print('DEBUG -- buildMainBody');
     if (style.showScrollBar!) {
       return Scrollbar(
         controller: mainVerticalController,
@@ -290,7 +292,7 @@ class _TimePlannerState extends State<TimePlanner> {
                                   )
                               ],
                             ),
-                            for (int i = 0; i < tasks.length; i++) tasks[i],
+                            for (int i = 0; i < widget.tasks!.length; i++) widget.tasks![i],
                           ],
                         ),
                       ),
@@ -361,7 +363,7 @@ class _TimePlannerState extends State<TimePlanner> {
                             )
                         ],
                       ),
-                      for (int i = 0; i < tasks.length; i++) tasks[i],
+                      for (int i = 0; i < widget.tasks!.length; i++) widget.tasks![i],
                     ],
                   ),
                 ),
