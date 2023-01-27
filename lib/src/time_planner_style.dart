@@ -16,6 +16,12 @@ class TimePlannerStyle {
   /// Background colors of time planner
   Color? backgroundColor;
 
+  /// If defined, this color will be used as background color for rows with odd index.
+  Color? interstitialOddColor;
+
+  /// If defined, this color will be used as background color for rows with even index.
+  Color? interstitialEvenColor;
+
   /// Show horizontal and vertical [scrollBar] on time planner, default is false.
   bool? showScrollBar;
 
@@ -27,6 +33,8 @@ class TimePlannerStyle {
     this.cellWidth,
     this.dividerColor,
     this.backgroundColor,
+    this.interstitialOddColor,
+    this.interstitialEvenColor,
     this.showScrollBar,
     this.horizontalTaskPadding,
     this.borderRadius,

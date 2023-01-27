@@ -97,6 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // cellHeight: 60,
             // cellWidth: 60,
             showScrollBar: true,
+            interstitialEvenColor: Colors.grey[50],
+            interstitialOddColor: Colors.grey[200],
           ),
           headers: const [
             TimePlannerTitle(
