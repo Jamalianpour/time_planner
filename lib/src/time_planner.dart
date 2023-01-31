@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:time_planner/src/time_planner_style.dart';
-
 import 'package:time_planner/src/config/global_config.dart' as config;
+import 'package:time_planner/src/time_planner_style.dart';
 import 'package:time_planner/src/time_planner_task.dart';
 import 'package:time_planner/src/time_planner_time.dart';
 import 'package:time_planner/src/time_planner_title.dart';
@@ -78,6 +77,8 @@ class _TimePlannerState extends State<TimePlanner> {
         const BorderRadius.all(Radius.circular(8.0));
     style.dividerColor = widget.style?.dividerColor;
     style.showScrollBar = widget.style?.showScrollBar ?? false;
+    style.interstitialOddColor = widget.style?.interstitialOddColor;
+    style.interstitialEvenColor = widget.style?.interstitialEvenColor;
   }
 
   /// store input data to static values
@@ -257,10 +258,15 @@ class _TimePlannerState extends State<TimePlanner> {
                                   Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
-                                      SizedBox(
+                                      Container(
+                                        color: i.isOdd
+                                            ? style.interstitialOddColor
+                                            : style.interstitialEvenColor,
                                         height:
                                             (config.cellHeight! - 1).toDouble(),
                                       ),
+                                      // The horizontal lines tat divides the rows
+                                      //TODO: Make a configurable color for this (maybe a size too)
                                       const Divider(
                                         height: 1,
                                       ),
@@ -279,6 +285,8 @@ class _TimePlannerState extends State<TimePlanner> {
                                         width:
                                             (config.cellWidth! - 1).toDouble(),
                                       ),
+                                      // The vertical lines that divides the columns
+                                      //TODO: Make a configurable color for this (maybe a size too)
                                       Container(
                                         width: 1,
                                         height: (config.totalHours *

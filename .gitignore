@@ -29,6 +29,8 @@
 .pub-cache/
 .pub/
 build/
+# For cleaner CRs
+pubspec.lock
 
 # Android related
 **/android/**/gradle-wrapper.jar
