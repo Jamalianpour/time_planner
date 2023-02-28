@@ -22,6 +22,9 @@ class TimePlannerStyle {
   /// Border radius for tasks, default is `BorderRadius.all(Radius.circular(8.0))`
   BorderRadiusGeometry? borderRadius;
 
+  /// Header container decoration
+  BoxDecoration? headerContainerDecoration;
+
   TimePlannerStyle({
     this.cellHeight,
     this.cellWidth,
@@ -30,5 +33,6 @@ class TimePlannerStyle {
     this.showScrollBar,
     this.horizontalTaskPadding,
     this.borderRadius,
+    this.headerContainerDecoration
   });
 }

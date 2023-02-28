@@ -56,21 +56,27 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     setState(() {
+      int day = Random().nextInt(14);
+      int hour = Random().nextInt(18) + 6;
+      int minutes = Random().nextInt(60);
+      int daysDuration = Random().nextInt(4) + 1;
+      int minutesDuration = Random().nextInt(90) + 30;
       tasks.add(
         TimePlannerTask(
+          cardElevation: 0,
           color: colors[Random().nextInt(colors.length)],
           dateTime: TimePlannerDateTime(
-              day: Random().nextInt(14),
-              hour: Random().nextInt(18) + 6,
-              minutes: Random().nextInt(60)),
-          minutesDuration: Random().nextInt(90) + 30,
-          daysDuration: Random().nextInt(4) + 1,
+              day: day,
+              hour: hour,
+              minutes: minutes),
+          minutesDuration: minutesDuration,
+          daysDuration: daysDuration,
           onTap: () {
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text('You click on time planner object')));
           },
           child: Text(
-            'this is a demo',
+            'day: $day, time: $hour:$minutes, minutes duration: $minutesDuration, days duration: $daysDuration',
             style: TextStyle(color: Colors.grey[350], fontSize: 12),
           ),
         ),
@@ -78,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Random task added to time planner!')));
+        const SnackBar(content: Text('Random task added to time planner!'), duration: Duration(milliseconds: 100),));
   }
 
   @override
@@ -94,9 +100,21 @@ class _MyHomePageState extends State<MyHomePage> {
           endHour: 23,
           use24HourFormat: false,
           style: TimePlannerStyle(
-            // cellHeight: 60,
-            // cellWidth: 60,
+            cellHeight: 120,
+            cellWidth: 282,
             showScrollBar: true,
+            dividerColor: Colors.transparent,
+            headerContainerDecoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xff030303).withOpacity(0.08),
+                  blurRadius: 12,
+                  spreadRadius: 0,
+                  offset: Offset(0, 4),
+                )
+              ]
+            )
           ),
           headers: const [
             TimePlannerTitle(

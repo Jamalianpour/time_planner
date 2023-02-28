@@ -15,11 +15,11 @@ class TimePlannerTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: config.cellHeight!.toDouble() - 1,
+      height: config.cellHeight!.toDouble(),
       width: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        child: Text(time!),
+        child: SizedBox(height: 20, child: Text(time!, )),
       ),
     );
   }

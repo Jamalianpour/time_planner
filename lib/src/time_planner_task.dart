@@ -16,6 +16,9 @@ class TimePlannerTask extends StatelessWidget {
   /// Background color of task
   final Color? color;
 
+  /// Card elevation
+  final double? cardElevation;
+
   /// This will be happen when user tap on task, for example show a dialog or navigate to other page
   final Function? onTap;
 
@@ -33,12 +36,13 @@ class TimePlannerTask extends StatelessWidget {
     this.color,
     this.onTap,
     this.child,
+    this.cardElevation
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: ((config.cellHeight! * (dateTime.hour - config.startHour)) +
+      top: (10 + (config.cellHeight! * (dateTime.hour - config.startHour)) +
               ((dateTime.minutes * config.cellHeight!) / 60))
           .toDouble(),
       left: config.cellWidth! * dateTime.day.toDouble(),
@@ -49,8 +53,9 @@ class TimePlannerTask extends StatelessWidget {
           padding:
               EdgeInsets.only(left: config.horizontalTaskPadding!.toDouble()),
           child: Material(
-            elevation: 3,
+            elevation: cardElevation ?? 3,
             borderRadius: config.borderRadius,
+            clipBehavior: Clip.none,
             child: Stack(
               children: [
                 InkWell(
