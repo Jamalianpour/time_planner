@@ -21,7 +21,7 @@ class TimePlannerTime extends StatelessWidget {
       width: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        child: !isTimeOnAxis! ? Center(child: Text(time!)) : Text(time!),
+        child: isTimeOnAxis! ? Text(time!) : Center(child: Text(time!)),
       ),
     );
   }
