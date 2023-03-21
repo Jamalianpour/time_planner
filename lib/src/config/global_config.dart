@@ -11,5 +11,5 @@ late double totalHours;
 late bool use24HourFormat;
 late int totalDays;
 late int startHour;
-late bool isTimeOnAxis;
+late bool setTimeOnAxis;
 BorderRadiusGeometry? borderRadius;

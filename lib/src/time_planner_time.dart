@@ -5,13 +5,13 @@ import 'package:time_planner/src/config/global_config.dart' as config;
 class TimePlannerTime extends StatelessWidget {
   /// Text it will be show as hour
   final String? time;
-  final bool? isTimeOnAxis;
+  final bool? setTimeOnAxis;
 
   /// Show the hour for each row of time planner
   const TimePlannerTime({
     Key? key,
     this.time,
-    this.isTimeOnAxis,
+    this.setTimeOnAxis,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class TimePlannerTime extends StatelessWidget {
       width: 60,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        child: isTimeOnAxis! ? Text(time!) : Center(child: Text(time!)),
+        child: setTimeOnAxis! ? Text(time!) : Center(child: Text(time!)),
       ),
     );
   }

@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           startHour: 6,
           endHour: 23,
           use24HourFormat: false,
-          isTimeOnAxis: false,
+          setTimeOnAxis: false,
           style: TimePlannerStyle(
             // cellHeight: 60,
             // cellWidth: 60,
