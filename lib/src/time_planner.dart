@@ -30,6 +30,9 @@ class TimePlanner extends StatefulWidget {
   /// Whether time is displayed in 24 hour format or am/pm format in the time column on the left.
   final bool use24HourFormat;
 
+  //Whether the time is displayed on the axis of the tim or on the center of the timeblock. Default is false.
+  final bool setTimeOnAxis;
+
   /// Time planner widget
   const TimePlanner({
     Key? key,
@@ -39,6 +42,7 @@ class TimePlanner extends StatefulWidget {
     this.tasks,
     this.style,
     this.use24HourFormat = false,
+    this.setTimeOnAxis = false,
     this.currentTimeAnimation,
   }) : super(key: key);
   @override
@@ -92,6 +96,7 @@ class _TimePlannerState extends State<TimePlanner> {
     config.totalDays = widget.headers.length;
     config.startHour = widget.startHour;
     config.use24HourFormat = widget.use24HourFormat;
+    config.setTimeOnAxis = widget.setTimeOnAxis;
     config.borderRadius = style.borderRadius;
     isAnimated = widget.currentTimeAnimation;
     tasks = widget.tasks ?? [];
@@ -195,6 +200,7 @@ class _TimePlannerState extends State<TimePlanner> {
                                   child: TimePlannerTime(
                                     // this returns the formatted time string based on the use24HourFormat argument.
                                     time: formattedTime(i),
+                                    setTimeOnAxis: config.setTimeOnAxis,
                                   ),
                                 )
                             ],
