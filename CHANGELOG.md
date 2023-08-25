@@ -1,5 +1,6 @@
 ## [0.1.2]
-- Added interstitialOddColor and insterstitialEvenColor as nullable variables for defining an instertitial row design (for easiness of read of the table)
+- Added interstitialOddColor and interstitialEvenColor as nullable variables for defining an interstitial row design (for easiness of read of the table)
+- update to flutter 3.13
 
 ## [0.1.1]
 - Fix multi days task

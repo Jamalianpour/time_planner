@@ -25,13 +25,13 @@ class TimePlannerTask extends StatelessWidget {
   final Widget? child;
 
   /// parameter to set space from left, to set it: config.cellWidth! * dateTime.day.toDouble()
-  double? leftSpace;
+  final double? leftSpace;
 
   /// parameter to set width of task, to set it: (config.cellWidth!.toDouble() * (daysDuration ?? 1)) -config.horizontalTaskPadding!
-  double? widthTask;
+  final double? widthTask;
 
   /// Widget that show on time planner as the tasks
-  TimePlannerTask({
+  const TimePlannerTask({
     Key? key,
     required this.minutesDuration,
     required this.dateTime,
