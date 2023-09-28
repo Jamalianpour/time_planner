@@ -1,3 +1,6 @@
+## [0.1.2+1]
+- Fix multi days task- [#25](https://github.com/Jamalianpour/time_planner/issues/25)
+
 ## [0.1.2]
 - Added interstitialOddColor and interstitialEvenColor as nullable variables for defining an interstitial row design (for easiness of read of the table)
 - update to flutter 3.13

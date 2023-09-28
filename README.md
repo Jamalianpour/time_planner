@@ -32,7 +32,7 @@ You can see web demo here: [https://jamalianpour.github.io/time_planner_demo](ht
 
 ```yaml
 dependencies:
-  time_planner: ^0.1.1
+  time_planner: ^0.1.2+1
 ```
 
 ##### 2. import time planner lib

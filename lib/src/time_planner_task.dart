@@ -31,17 +31,17 @@ class TimePlannerTask extends StatelessWidget {
   final double? widthTask;
 
   /// Widget that show on time planner as the tasks
-  const TimePlannerTask({
-    Key? key,
-    required this.minutesDuration,
-    required this.dateTime,
-    this.daysDuration,
-    this.color,
-    this.onTap,
-    this.child,
-    this.leftSpace,
-    this.widthTask
-  }) : super(key: key);
+  const TimePlannerTask(
+      {Key? key,
+      required this.minutesDuration,
+      required this.dateTime,
+      this.daysDuration,
+      this.color,
+      this.onTap,
+      this.child,
+      this.leftSpace,
+      this.widthTask})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class TimePlannerTask extends StatelessWidget {
       top: ((config.cellHeight! * (dateTime.hour - config.startHour)) +
               ((dateTime.minutes * config.cellHeight!) / 60))
           .toDouble(),
-      left: leftSpace,
+      left: config.cellWidth! * dateTime.day.toDouble() + (leftSpace ?? 0.0),
       child: SizedBox(
         width: widthTask,
         child: Padding(
